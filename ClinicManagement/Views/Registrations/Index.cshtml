@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/FrontView.cshtml";
+}
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Registration</h2>
+                <div class="page_link">
+                    <a href="@Url.Action("Index","Front")">Home</a>
+                    <a>Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="login_box_area p_120">
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7"></div>
+            <div class="col-lg-4">
+                @if (TempData["Message"] != null)
+                {
+            <h3 class="alert alert-success">@TempData["Message"]</h3>
+                }
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+       
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="~/Client/img/login.jpg" alt="">
+                    <div class="hover">
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8 text-justify">
+                                
+                                    @foreach (var reg in ViewBag.reg)
+                                    {
+                                      
+                                    <h2 style="color:white;">TOPIC: @reg.Topic</h2>
+                                    <h2 style="color:white;">SUBJECT: @reg.Subject</h2>
+                                    <h2 style="color:white;">TIME: @reg.Time</h2>
+                                    <h2 style="color:white;">DURATION: @reg.Duration</h2>
+                                    <h2 style="color:white;">TEACHER: @reg.Teacher.Name</h2>
+                                    <h2 style="color:white;">ORGANIZER: @reg.Organizer.Name</h2>
+                                        
+                                    }
+                                
+                            </div>
+                            <div class="col-lg-2"></div>
+                           
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>Register Now</h3>
+                  
+                    @using (Html.BeginForm("Index", "Registrations", FormMethod.Post, new { @class = "row contact_form" }))
+                    {
+                        <form class="row contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                            @foreach (var item in ViewBag.reg)
+                            {
+                            <input type="hidden" class="form-control" name="id" value="@item.Id">
+                            }
+                            <div class="col-md-1"></div>
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="name" placeholder="Enter your name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" placeholder="Enter email address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="age" placeholder="Enter Age" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" name="contact" placeholder="Enter Contact" required>
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                            <div class="col-md-5"></div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
+                                <button type="submit" value="submit" class="btn submit_btn">Submit</button>
+                            </div>
+                        </form>
+                    }
+
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

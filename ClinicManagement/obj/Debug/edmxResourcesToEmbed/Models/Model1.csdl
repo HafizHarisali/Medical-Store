@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClinicManagmentSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Organizer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Educations" Relationship="ClinicManagmentSystemModel.FK_Educations_Organizers" FromRole="Organizer" ToRole="Education" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Educations" Relationship="ClinicManagmentSystemModel.FK_Educations_Teachers" FromRole="Teacher" ToRole="Education" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Byte" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UsertypeId" Type="Int32" />
+    <NavigationProperty Name="Usertype" Relationship="Self.FK_Users_Usertypes" FromRole="Users" ToRole="Usertypes" />
+  </EntityType>
+  <EntityType Name="Usertype">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_Users_Usertypes" FromRole="Usertypes" ToRole="Users" />
+  </EntityType>
+  <Association Name="FK_Users_Usertypes">
+    <End Role="Usertypes" Type="Self.Usertype" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usertypes">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="UsertypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClinicManagmentSystemEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Organizers" EntityType="Self.Organizer" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Usertypes" EntityType="Self.Usertype" />
+    <AssociationSet Name="FK_Users_Usertypes" Association="Self.FK_Users_Usertypes">
+      <End Role="Usertypes" EntitySet="Usertypes" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <EntitySet Name="Registrations" EntityType="ClinicManagmentSystemModel.Registration" />
+    <EntitySet Name="Feedbacks" EntityType="ClinicManagmentSystemModel.Feedback" />
+    <EntitySet Name="MedicineTypes" EntityType="ClinicManagmentSystemModel.MedicineType" />
+    <EntitySet Name="Educations" EntityType="ClinicManagmentSystemModel.Education" />
+    <AssociationSet Name="FK_Educations_Organizers" Association="ClinicManagmentSystemModel.FK_Educations_Organizers">
+      <End Role="Organizer" EntitySet="Organizers" />
+      <End Role="Education" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Educations_Teachers" Association="ClinicManagmentSystemModel.FK_Educations_Teachers">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Education" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Registrations_Educations" Association="ClinicManagmentSystemModel.FK_Registrations_Educations">
+      <End Role="Education" EntitySet="Educations" />
+      <End Role="Registration" EntitySet="Registrations" />
+    </AssociationSet>
+    <EntitySet Name="Orderdetails" EntityType="ClinicManagmentSystemModel.Orderdetail" />
+    <EntitySet Name="Orders" EntityType="ClinicManagmentSystemModel.Order" />
+    <AssociationSet Name="FK_Orderdetails_Orders" Association="ClinicManagmentSystemModel.FK_Orderdetails_Orders">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Orderdetail" EntitySet="Orderdetails" />
+    </AssociationSet>
+    <EntitySet Name="Categories" EntityType="ClinicManagmentSystemModel.Category" />
+    <EntitySet Name="EducationTypes" EntityType="ClinicManagmentSystemModel.EducationType" />
+    <EntitySet Name="Images" EntityType="ClinicManagmentSystemModel.Image" />
+    <AssociationSet Name="FK_Educations_EducationTypes" Association="ClinicManagmentSystemModel.FK_Educations_EducationTypes">
+      <End Role="EducationType" EntitySet="EducationTypes" />
+      <End Role="Education" EntitySet="Educations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_Educations" Association="ClinicManagmentSystemModel.FK_Images_Educations">
+      <End Role="Education" EntitySet="Educations" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <EntitySet Name="AllOrdersDetails" EntityType="ClinicManagmentSystemModel.AllOrdersDetail" />
+    <EntitySet Name="Products" EntityType="ClinicManagmentSystemModel.Product" />
+    <EntitySet Name="SuppliedProducts" EntityType="ClinicManagmentSystemModel.SuppliedProduct" />
+    <EntitySet Name="Suppliers" EntityType="ClinicManagmentSystemModel.Supplier" />
+    <AssociationSet Name="FK_Products_Categories" Association="ClinicManagmentSystemModel.FK_Products_Categories">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Images_Products" Association="ClinicManagmentSystemModel.FK_Images_Products">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_MedicineTypes" Association="ClinicManagmentSystemModel.FK_Products_MedicineTypes">
+      <End Role="MedicineType" EntitySet="MedicineTypes" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_SuppliedProducts" Association="ClinicManagmentSystemModel.FK_Products_SuppliedProducts">
+      <End Role="SuppliedProduct" EntitySet="SuppliedProducts" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SuppliedProducts_Suppliers" Association="ClinicManagmentSystemModel.FK_SuppliedProducts_Suppliers">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="SuppliedProduct" EntitySet="SuppliedProducts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Registration">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Age" Type="Int32" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EducationId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Education" Relationship="ClinicManagmentSystemModel.FK_Registrations_Educations" FromRole="Registration" ToRole="Education" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="MedicineType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="ClinicManagmentSystemModel.FK_Products_MedicineTypes" FromRole="MedicineType" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Education">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Topic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Fees" Type="Double" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Time" Type="Time" Precision="7" />
+    <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TeacherId" Type="Int32" />
+    <Property Name="OrganizerId" Type="Int32" />
+    <Property Name="EducationaTypeId" Type="Int32" />
+    <NavigationProperty Name="Organizer" Relationship="ClinicManagmentSystemModel.FK_Educations_Organizers" FromRole="Education" ToRole="Organizer" />
+    <NavigationProperty Name="Teacher" Relationship="ClinicManagmentSystemModel.FK_Educations_Teachers" FromRole="Education" ToRole="Teacher" />
+    <NavigationProperty Name="Registrations" Relationship="ClinicManagmentSystemModel.FK_Registrations_Educations" FromRole="Education" ToRole="Registration" />
+    <NavigationProperty Name="EducationType" Relationship="ClinicManagmentSystemModel.FK_Educations_EducationTypes" FromRole="Education" ToRole="EducationType" />
+    <NavigationProperty Name="Images" Relationship="ClinicManagmentSystemModel.FK_Images_Educations" FromRole="Education" ToRole="Image" />
+  </EntityType>
+  <Association Name="FK_Educations_Organizers">
+    <End Type="ClinicManagmentSystemModel.Organizer" Role="Organizer" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Education" Role="Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Organizer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="OrganizerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Educations_Teachers">
+    <End Type="ClinicManagmentSystemModel.Teacher" Role="Teacher" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Education" Role="Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Registrations_Educations">
+    <End Type="ClinicManagmentSystemModel.Education" Role="Education" Multiplicity="1" />
+    <End Type="ClinicManagmentSystemModel.Registration" Role="Registration" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Education">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Registration">
+        <PropertyRef Name="EducationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Orderdetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Orderid" Type="Int32" />
+    <Property Name="Productid" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Productprice" Type="Double" />
+    <Property Name="Productqty" Type="Int32" />
+    <Property Name="Productamount" Type="Double" />
+    <NavigationProperty Name="Order" Relationship="ClinicManagmentSystemModel.FK_Orderdetails_Orders" FromRole="Orderdetail" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Clinicname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Amount" Type="Double" />
+    <NavigationProperty Name="Orderdetails" Relationship="ClinicManagmentSystemModel.FK_Orderdetails_Orders" FromRole="Order" ToRole="Orderdetail" />
+  </EntityType>
+  <Association Name="FK_Orderdetails_Orders">
+    <End Type="ClinicManagmentSystemModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Orderdetail" Role="Orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Orderdetail">
+        <PropertyRef Name="Orderid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="ClinicManagmentSystemModel.FK_Products_Categories" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="EducationType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Educations" Relationship="ClinicManagmentSystemModel.FK_Educations_EducationTypes" FromRole="EducationType" ToRole="Education" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Imagename" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Productid" Type="Int32" />
+    <Property Name="Educationid" Type="Int32" />
+    <NavigationProperty Name="Education" Relationship="ClinicManagmentSystemModel.FK_Images_Educations" FromRole="Image" ToRole="Education" />
+    <NavigationProperty Name="Product" Relationship="ClinicManagmentSystemModel.FK_Images_Products" FromRole="Image" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Educations_EducationTypes">
+    <End Type="ClinicManagmentSystemModel.EducationType" Role="EducationType" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Education" Role="Education" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EducationType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Education">
+        <PropertyRef Name="EducationaTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_Educations">
+    <End Type="ClinicManagmentSystemModel.Education" Role="Education" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Image" Role="Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Education">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="Educationid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="AllOrdersDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Clinicname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Amount" Type="Double" />
+    <Property Name="Productid" Type="Int32" />
+    <Property Name="Productprice" Type="Double" />
+    <Property Name="Productqty" Type="Int32" />
+    <Property Name="Productamount" Type="Double" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Id" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SuppliedProductId" Type="Int32" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Medicinetypeid" Type="Int32" />
+    <Property Name="CategoryId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="ClinicManagmentSystemModel.FK_Products_Categories" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Images" Relationship="ClinicManagmentSystemModel.FK_Images_Products" FromRole="Product" ToRole="Image" />
+    <NavigationProperty Name="MedicineType" Relationship="ClinicManagmentSystemModel.FK_Products_MedicineTypes" FromRole="Product" ToRole="MedicineType" />
+    <NavigationProperty Name="SuppliedProduct" Relationship="ClinicManagmentSystemModel.FK_Products_SuppliedProducts" FromRole="Product" ToRole="SuppliedProduct" />
+  </EntityType>
+  <EntityType Name="SuppliedProduct">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="TotalQuantity" Type="Int32" />
+    <Property Name="AvailableQuantity" Type="Int32" />
+    <Property Name="TotalAmount" Type="Double" />
+    <Property Name="GrandAmount" Type="Double" />
+    <Property Name="Datetime" Type="DateTime" Precision="3" />
+    <Property Name="SupplierId" Type="Int32" />
+    <NavigationProperty Name="Products" Relationship="ClinicManagmentSystemModel.FK_Products_SuppliedProducts" FromRole="SuppliedProduct" ToRole="Product" />
+    <NavigationProperty Name="Supplier" Relationship="ClinicManagmentSystemModel.FK_SuppliedProducts_Suppliers" FromRole="SuppliedProduct" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="SuppliedProducts" Relationship="ClinicManagmentSystemModel.FK_SuppliedProducts_Suppliers" FromRole="Supplier" ToRole="SuppliedProduct" />
+  </EntityType>
+  <Association Name="FK_Products_Categories">
+    <End Type="ClinicManagmentSystemModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Images_Products">
+    <End Type="ClinicManagmentSystemModel.Product" Role="Product" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Image" Role="Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="Productid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_MedicineTypes">
+    <End Type="ClinicManagmentSystemModel.MedicineType" Role="MedicineType" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedicineType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Medicinetypeid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_SuppliedProducts">
+    <End Type="ClinicManagmentSystemModel.SuppliedProduct" Role="SuppliedProduct" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SuppliedProduct">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="SuppliedProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SuppliedProducts_Suppliers">
+    <End Type="ClinicManagmentSystemModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+    <End Type="ClinicManagmentSystemModel.SuppliedProduct" Role="SuppliedProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SuppliedProduct">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

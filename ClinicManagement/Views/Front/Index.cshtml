@@ -1,0 +1,192 @@
+﻿<!--================Home Banner Area =================-->
+@{ 
+    Layout = "~/Views/Shared/FrontView.cshtml";
+}
+<section class="home_banner_area">
+    <div class="overlay"></div>
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content row">
+                <div class="offset-lg-2 col-lg-8">
+                    <h3>
+                       Clinic Management
+                        <br />System
+                    </h3>
+                    <p>
+                       
+                    </p>
+                    <a class="white_bg_btn" href="@Url.Action("AllProducts","Front")">View Shop</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Home Banner Area =================-->
+<!--================Hot Deals Area =================-->
+<section class="hot_deals_area section_gap">
+    <div class="container-fluid">
+        <div class="row">
+            @{
+                var cat = new ClinicManagement.Models.ClinicManagmentSystemEntities().Categories.OrderByDescending(c=>c.Id).Take(2).ToList();
+             
+                foreach (var item in cat)
+                {
+
+                    <div class="col-lg-6">
+                        <div class="hot_deal_box">
+                           
+                            <img src="~/Client/img/medicine.jpg" height="220" width="550">
+                           
+                            <div class="content">
+                                <h2>@item.Name</h2>
+                                <p><a class="hot_deal_link" href="@Url.Action("Product","Front",new { id=item.Id})"></a>shop now</p>
+                            </div>
+                           
+                        </div>
+                    </div>
+                }
+
+
+            }
+        </div>
+    </div>
+</section>
+<!--================End Hot Deals Area =================-->
+<!--================Clients Logo Area =================-->
+<section class="clients_logo_area">
+    <div class="container-fluid">
+        <div class="clients_slider owl-carousel">
+            <div class="item">
+                <img src="/Client/img/clients-logo/c-logo-1.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/Client/img/clients-logo/c-logo-2.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/Client/img/clients-logo/c-logo-3.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/Client/img/clients-logo/c-logo-4.png" alt="">
+            </div>
+            <div class="item">
+                <img src="/Client/img/clients-logo/c-logo-5.png" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Clients Logo Area =================-->
+<!--================Feature Product Area =================-->
+<section class="feature_product_area section_gap">
+    <div class="main_box">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="main_title">
+                    <h2>Latest Prodcuts</h2>
+                    <p>Who are in extremely love with eco friendly system.</p>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var pro in ViewBag.product)
+                {
+                   
+                    <div class="col col1">
+                        <div class="f_p_item">
+                            <div class="f_p_img">
+                                @foreach (var imgs in ViewBag.images)
+                                {
+                                    if (imgs.Productid == pro.Id)
+                                    {
+                                       
+                                    <img src="~/Content/Images/@imgs.Imagename" height="200" width="150">
+                                          
+                                    }
+                                   
+                                }
+
+                                <div class="white_bg_btn">
+
+                                    <a href="@Url.Action("ProductDetails","Front",new { id=pro.Id})">
+                                        <b style="color:black;">View</b>
+                                    </a>
+                                </div>
+                            </div>
+                            <a href="/Client/#">
+                                <h4>@pro.SuppliedProduct.ProductName</h4>
+                            </a>
+                            <h5>Rs.@pro.Price</h5>
+                        </div>
+                    </div>
+                }
+               
+                        
+        </div>
+            <div class="main_title">
+                <h2><a href="@Url.Action("AllProducts","Front")" class="white_bg_btn">Show More</a></h2>
+            </div>
+          
+    </div>
+</section>
+<!--================End Feature Product Area =================-->
+<!--================ Subscription Area ================-->
+
+    <div class="main_title">
+        <h2>Latest News</h2>
+        <p>Who are in extremely love with eco friendly system.</p>
+    </div>
+
+<section class="blog_area">
+    <div class="container">
+        <div class="row">
+            @foreach (var edu in ViewBag.education)
+            {
+                <div class="col-lg-6">
+                    <article class="row blog_item">
+                        <div class="blog_post">
+                            @foreach (var imgs in ViewBag.images)
+                            {
+                                if (imgs.Educationid == edu.Id)
+                                {
+                                    <img src="~/Content/Images/@imgs.Imagename" alt="" height="320" width="550">
+                                }
+
+                            }
+                           
+                            <div class="blog_details">
+                                <a href="single-blog.html">
+                                    <h2>@edu.Topic</h2>
+                                </a>
+                                <strong>
+                                    @edu.Subject                              
+                                  </strong>
+                               
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <b style="color:black;">Teacher:</b> @edu.Teacher.Name
+                                        <br />
+                                        <b style="color:black;">Date:</b> @edu.Date
+                                    </div>
+                                    <div class="col-md-6">
+                                        <b style="color:black;">Time:</b> @edu.Time
+                                        <br />
+                                        <b style="color:black;">Organizer:</b> @edu.Organizer.Name
+                                    </div>
+                                </div>
+                                <br />
+                                <a href="single-blog.html" class="btn submit_btn">Register Now</a>
+                            </div>
+                        </div>
+
+
+                    </article>
+
+
+                </div>
+            }
+            
+           
+    </div>
+        </div>
+</section>
+
+
+<!--================ End Subscription Area ================-->

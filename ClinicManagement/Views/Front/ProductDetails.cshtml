@@ -1,0 +1,234 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetails";
+    Layout = "~/Views/Shared/FrontView.cshtml";
+}
+
+@using ClinicManagement.Models;
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Clinic Management</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="vendors/linericon/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+   <script>
+       function Valid()
+       {
+           var a = document.getElementById('qty').value;
+           if(a<=0)
+           {
+               var m = document.getElementById('message').style.display = "block";
+                document.getElementById('disable').disabled=true;
+               
+              
+           }
+           else if (a>=1)
+           {
+               var m = document.getElementById('message').style.display = "none";
+               document.getElementById('disable').disabled = false;
+           }
+       }
+
+       function Secure()
+       {
+           var s = document.getElementById('disabled').value;
+          
+               var m = document.getElementById('login').style.display = "block";
+           
+       }
+   </script>
+</head>
+<body>
+    <!--================Header Menu Area =================-->
+    
+    <!--================Header Menu Area =================-->
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h2>Product Details</h2>
+                    <div class="page_link">
+                        <a href="@Url.Action("Index","Front")">Home</a>
+                        @foreach (var cat in ViewBag.cname)
+                        {
+                            <a href="@Url.Action("Product","Front",new {id=cat.Id })">@cat.Name</a>
+                        }
+                        @foreach (var pro in ViewBag.pro)
+                        {
+                            <a>@pro.SuppliedProduct.ProductName</a>
+                        }
+                       
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+    <!--================Single Product Area =================-->
+   
+    <div class="product_image_area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4"></div>
+                @if (TempData["Message"] != null)
+            {
+                    <div class="col-lg-4"><p class="alert alert-success">@TempData["Message"]<a href="@Url.Action("Cart","Front")">    View Cart</a></p></div>
+                }
+
+                <div class="col-lg-4"></div>
+            </div>
+            <div class="row s_product_inner">
+                <div class="col-lg-6">
+                    @foreach (var imgs in ViewBag.images)
+                    {
+                        <div class="s_product_img">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                               
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="~/Content/Images/@imgs.Imagename" alt="" height="400" width="400">
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                </div>
+                <div class="col-lg-5 offset-lg-1">
+                    @foreach (var pro in ViewBag.pro)
+                    {
+                        <div class="s_product_text">
+                            <h3>@pro.SuppliedProduct.ProductName</h3>
+                            <h2>Rs.@pro.Price</h2>
+                            <ul class="list">
+                                <li>
+                                    <a>
+                                        <span>Category</span> : @pro.Category.Name
+                                    </a>
+                                </li>
+                                @if (pro.SuppliedProduct.AvailableQuantity <= 0)
+                                {
+                                <li>
+                                    <a>
+                                        <span>Availibility</span> : Out Of Stock
+                                    </a>
+                                </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <a>
+                                            <span>Availibility</span> : In Stock
+                                        </a>
+                                    </li>
+                                }
+                                <li>
+                                    <a>
+                                        <span>Price</span> :Rs.@pro.Price
+                                                                        </a>
+                                </li>
+                            </ul>
+                            <p>
+                               @pro.Description
+                            </p>
+                           
+                            @using (Html.BeginForm("Cart", "Front", FormMethod.Post))
+                            {
+
+                            <div class="product_count">
+                              
+                                <input type="hidden" name="pid" value="@pro.Id"/>
+                                <input type="number" name="pqty" value="1" id="qty" onchange="Valid()" onkeyup="Valid()" required/>
+                                <br />
+                                <span id="message" style="display:none;">Enter Valid Input</span>
+                                <br />
+                                <br />
+                        </div>  
+                        <br />
+                                //var db = new ClinicManagmentSystemEntities();
+                                //ProductItems pi = new ProductItems();
+
+                                if (pro.SuppliedProduct.AvailableQuantity <= 0)
+                                {
+                                    <button type="button" class="main_btn" id="disable">Add to Cart</button>
+                                    <h1>Out Of Stock</h1>
+
+                                }
+
+                                    @*else if (pi.Count > pro.SuppliedProduct.AvailableQuantity)
+                                    {
+                                        <button type="button" class="main_btn" id="disable">Add to Cart</button>
+                                        <h1>Out Of Stock</h1>
+                            }*@
+
+                                    else if (Session["Email"] == null)
+                                    {
+                                    <button type="button" class="main_btn" id="disabled" onclick="Secure();">Add to Cart</button>
+                                    <hr />
+                                    <h6 id="login" style="display:none;" class="alert alert-warning">Make an Order? <a href="@Url.Action("ClientLogin", "Front")">Login First</a></h6>
+                                    }
+
+                                    else
+                                    {
+                                <button type="submit" class="main_btn" id="disable">Add to Cart</button>
+
+                            }
+
+
+
+                                }
+                            
+                </div>
+                    }
+            </div>
+        </div>
+    </div>
+        </div>
+    <!--================End Single Product Area =================-->
+    <!--================Product Description Area =================-->
+    
+    <!--================End Product Description Area =================-->
+    <!--================ Subscription Area ================-->
+    
+    <!--================ End Subscription Area ================-->
+    <!--================ start footer Area  =================-->
+    
+    <!--================ End footer Area  =================-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="vendors/isotope/isotope-min.js"></script>
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendors/counter-up/jquery.counterup.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>
+

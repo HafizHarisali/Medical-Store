@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewBag.Title = "AllProducts";
+    Layout = "~/Views/Shared/FrontView.cshtml";
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Fashiop</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="vendors/linericon/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!--================Header Menu Area =================-->
+    <!--================Header Menu Area =================-->
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h2>Shop Category Page</h2>
+                    <div class="page_link">
+                        <a href="@Url.Action("Index","Front")">Home</a>
+                        <a>All Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_gap">
+        <div class="container-fluid">
+            <div class="row flex-row-reverse">
+                <div class="col-lg-9">
+                    <div class="product_top_bar">
+                        
+                    </div>
+                    <div class="latest_product_inner row">
+                        @foreach (var pro in ViewBag.allpro)
+                        {
+                          
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <div class="f_p_item">
+                                    <div class="f_p_img">
+                                        @foreach (var imgs in ViewBag.images)
+                                        {
+                                            if (imgs.Productid == pro.Id)
+                                            {
+                                              
+                                                <img src="~/Content/Images/@imgs.Imagename" height="200" width="150">
+
+                                            }
+
+                                        }
+
+                                        <div class="white_bg_btn">
+                                            <a href="@Url.Action("ProductDetails", "Front",new { id=pro.Id})">
+                                                <b style="color:black;">View</b>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                    <a href="#">
+                                        <h4>@pro.SuppliedProduct.ProductName</h4>
+                                    </a>
+                                    <h5>Rs.@pro.Price</h5>
+                                </div>
+
+                            </div>
+
+                        }
+
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+                        <aside class="left_widgets cat_widgets">
+                            <div class="l_w_title">
+                                <h3>Browse Categories</h3>
+                            </div>
+                            <div class="widgets_inner">
+                                <ul class="list">
+                                    @foreach (var cat in ViewBag.cat)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("Product","Front",new { id=cat.Id})">@cat.Name</a>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+                        </aside>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+    <!--================ Subscription Area ================-->
+    
+    <!--================ End Subscription Area ================-->
+    <!--================ start footer Area  =================-->
+    <!--================ End footer Area  =================-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="vendors/isotope/isotope-min.js"></script>
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendors/counter-up/jquery.counterup.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>
+
+
+
+
+

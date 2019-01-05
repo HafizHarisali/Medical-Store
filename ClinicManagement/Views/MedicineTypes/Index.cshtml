@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ClinicManagement.Models.MedicineType>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="panel-body">
+        <div class="alert alert-info">
+            <p style="color:black;font-size:16px;">Medicine Types</p>
+        </div>
+    </div>
+</div>
+
+<p>
+    <a href="@Url.Action("Create","MedicineTypes")"><b class="btn btn-default">Create New</b></a>
+</p>
+<table class="table table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit","MedicineTypes",new {id=item.Id })"><i class="fa fa-edit fa-fw"></i></a> |
+            <a href="@Url.Action("Details","MedicineTypes",new {id=item.Id })"><i class="fa fa-file-text-o"></i></a> |
+            <a href="@Url.Action("Delete","MedicineTypes",new {id=item.Id })"><i class="fa fa-trash fa-fw"></i></a> 
+        </td>
+    </tr>
+}
+
+</table>

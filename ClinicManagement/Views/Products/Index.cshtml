@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ClinicManagement.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="panel-body">
+        <div class="alert alert-info">
+            <p style="color:black;font-size:16px;">Products</p>
+        </div>
+    </div>
+</div>
+<p>
+    <a href="@Url.Action("Create","Products")"><b class="btn btn-default">Create New</b></a>
+</p>
+<table class="table table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SuppliedProduct.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicineType)
+        </th>
+       
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SuppliedProduct.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicineType.Name)
+        </td>
+        
+        <td>
+            <a href="@Url.Action("Edit","Products",new {id=item.Id })"><i class="fa fa-edit fa-fw"></i></a> |
+            <a href="@Url.Action("Details","Products",new {id=item.Id })"><i class="fa fa-file-text-o"></i></a> |
+            <a href="@Url.Action("Delete","Products",new {id=item.Id })"><i class="fa fa-trash fa-fw"></i></a> |
+            <a href="@Url.Action("Images","Products",new {id=item.Id })"><i class="fa fa-image fa-fw"></i></a> 
+        </td>
+    </tr>
+}
+
+</table>

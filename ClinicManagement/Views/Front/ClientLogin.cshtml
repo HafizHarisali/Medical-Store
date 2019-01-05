@@ -1,0 +1,131 @@
+﻿@{
+    Layout = "~/Views/Shared/FrontView.cshtml";
+}
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="/Client/img/favicon.png" type="image/png">
+    <title>Fashiop</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/Client/css/bootstrap.css">
+    <link rel="stylesheet" href="/Client/vendors/linericon/style.css">
+    <link rel="stylesheet" href="/Client/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/Client/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="/Client/vendors/lightbox/simpleLightbox.css">
+    <link rel="stylesheet" href="/Client/vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="/Client/vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="/Client/vendors/jquery-ui/jquery-ui.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="/Client/css/style.css">
+    <link rel="stylesheet" href="/Client/css/responsive.css">
+</head>
+<body>
+    <!--================Header Menu Area =================-->
+    
+    <!--================Header Menu Area =================-->
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h2>Login/Register</h2>
+                    <div class="page_link">
+                        <a href="/Client/index.html">Home</a>
+                        <a href="/Client/login.html">Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+    <!--================Login Box Area =================-->
+    <section class="login_box_area p_120">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="login_box_img">
+                        <img class="img-fluid" src="/Client/img/login.jpg" alt="">
+                        <div class="hover">
+                            <h4>New to our website?</h4>
+                            <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+                            <a class="main_btn" href="@Url.Action("ClientSignup","Front")">Create an Account</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="login_form_inner">
+                        <h3>Log in to enter</h3>
+                        @using (Html.BeginForm("ClientLogin","Front",FormMethod.Post,new {@class="row login_form" }))
+                        {
+                            if (TempData["Order"] != null)
+                            {
+                            <div class="panel">
+                                <p class="alert alert-danger">@TempData["Order"]</p>
+                             
+                            </div>
+                            }
+                            if (TempData["Message"] != null)
+                            {
+                                <div class="panel">
+                                    
+                                    <p class="alert alert-warning">@TempData["Message"]</p>
+                                </div>
+                            }
+
+                            <form class="row login_form" id="contactForm" novalidate="novalidate">
+                                <div class="col-md-12 form-group">
+                                    <input type="email" class="form-control" id="name" name="email" placeholder="Email" required>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <input type="password" class="form-control" id="name" name="password" placeholder="Password" required>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="creat_account">
+                                        <input type="checkbox" id="f-option2" name="selector">
+                                        <label for="f-option2">Keep me logged in</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <button type="submit" value="submit" class="btn submit_btn">Log In</button>
+                                    <a href="/Client/#">Forgot Password?</a>
+                                </div>
+                            </form>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Login Box Area =================-->
+    <!--================ Subscription Area ================-->
+    
+    <!--================ End Subscription Area ================-->
+    <!--================ start footer Area  =================-->
+    
+    <!--================ End footer Area  =================-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/Client/js/jquery-3.2.1.min.js"></script>
+    <script src="/Client/js/popper.js"></script>
+    <script src="/Client/js/bootstrap.min.js"></script>
+    <script src="/Client/js/stellar.js"></script>
+    <script src="/Client/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="/Client/vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="/Client/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="/Client/vendors/isotope/isotope-min.js"></script>
+    <script src="/Client/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="/Client/js/jquery.ajaxchimp.min.js"></script>
+    <script src="/Client/js/mail-script.js"></script>
+    <script src="/Client/vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="/Client/vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="/Client/vendors/counter-up/jquery.counterup.js"></script>
+    <script src="/Client/js/theme.js"></script>
+</body>
+</html>

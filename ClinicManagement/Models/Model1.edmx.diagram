@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="519753ab449448aa9872a84532a2bb7b" Name="Diagram1" ZoomLevel="74" ShowGrid="false">
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Organizer" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Teacher" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.User" Width="1.5" PointX="5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Usertype" Width="1.5" PointX="2.75" PointY="9.5" IsExpanded="true" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Users_Usertypes" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Registration" Width="1.5" PointX="12.875" PointY="3.625" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Feedback" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.MedicineType" Width="1.5" PointX="7.375" PointY="14.875" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Education" Width="1.5" PointX="10.625" PointY="3.875" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Educations_Organizers" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Educations_Teachers" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Registrations_Educations" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Orderdetail" Width="1.5" PointX="3" PointY="13.125" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Order" Width="1.5" PointX="0.75" PointY="13" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Orderdetails_Orders" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Category" Width="1.5" PointX="7.375" PointY="10.875" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.EducationType" Width="1.5" PointX="8.375" PointY="4" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Image" Width="1.5" PointX="12.875" PointY="7.5" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Educations_EducationTypes" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Images_Educations" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.AllOrdersDetail" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Product" Width="1.5" PointX="10.625" PointY="18" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.SuppliedProduct" Width="1.5" PointX="8.375" PointY="17.875" />
+        <EntityTypeShape EntityType="ClinicManagmentSystemModel.Supplier" Width="1.5" PointX="6.125" PointY="18.75" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Products_Categories" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Images_Products" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Products_MedicineTypes" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_Products_SuppliedProducts" />
+        <AssociationConnector Association="ClinicManagmentSystemModel.FK_SuppliedProducts_Suppliers" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

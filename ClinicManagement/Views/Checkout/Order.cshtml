@@ -1,0 +1,215 @@
+﻿@model ClinicManagement.Models.ShoppingCart
+@using ClinicManagement.Models;
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/FrontView.cshtml";
+
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/favicon.png" type="image/png">
+    <title>Fashiop</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="vendors/linericon/style.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="vendors/lightbox/simpleLightbox.css">
+    <link rel="stylesheet" href="vendors/nice-select/css/nice-select.css">
+    <link rel="stylesheet" href="vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="vendors/jquery-ui/jquery-ui.css">
+    <!-- main css -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+ 
+</head>
+<body>
+    <!--================Header Menu Area =================-->
+    <!--================Header Menu Area =================-->
+    <!--================Home Banner Area =================-->
+    <section class="banner_area">
+        <div class="banner_inner d-flex align-items-center">
+            <div class="overlay"></div>
+            <div class="container">
+                <div class="banner_content text-center">
+                    <h2>Product Checkout</h2>
+                    <div class="page_link">
+                        <a href="index.html">Home</a>
+                        <a href="checkout.html">Checkout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Home Banner Area =================-->
+    <!--================Checkout Area =================-->
+    <section class="checkout_area section_gap">
+        <div class="container">
+            <div class="billing_details">
+                <div class="row">
+                    <div class="col-lg-8">
+                        @if (TempData["Message"] != null)
+                        {
+                        <h4 class="alert alert-success">@TempData["Message"]</h4>
+                        }
+                        <h3>Billing Details</h3>
+                        @using (Html.BeginForm("PlaceOrder", "Checkout", FormMethod.Post, new { @class = "row contact_form" }))
+                        {
+                            var amount = ViewBag.amount;
+                            <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control"  name="firstname" value="" placeholder="First Name" required>
+                                    @*<span class="placeholder" data-placeholder="First name"></span>*@
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control"  name="lastname"  placeholder="Last Name" required>
+                                    @*<span class="placeholder" data-placeholder="Last name"></span>*@
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <input type="text" class="form-control"  name="clinicname" placeholder="Clinic name" required>
+                                </div>
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" name="number"  placeholder="Contact" required>
+                                    @*<span class="placeholder" data-placeholder="Phone number"></span>*@
+                                </div>
+
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control" name="address"  placeholder="Address" required>
+                                    @*<span class="placeholder" data-placeholder="Address"></span>*@
+                                </div>
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="text" class="form-control"  name="city"  placeholder="City" required>
+                                    @*<span class="placeholder" data-placeholder="Town/City"></span>*@
+                                </div>
+
+
+                                <div class="col-md-12 form-group p_star">
+                                    <input type="hidden" name="amount" value="@amount" />
+                                    
+                                </div>
+                                <div class="col-md-3">
+                                   
+                                </div>
+                                <div class="col-md-6">
+                                    
+                                </div>
+
+                                        <div class="col-md-3">
+                                            <input type="submit" class="main_btn2 form-control" value="Place Order">
+                                            
+                                        </div>
+                                    
+                                </form>
+
+                                    }
+                        
+
+
+                    </div>
+                   
+                                    <div class="col-lg-4">
+                                        <div class="order_box">
+                                            <h2>Your Order</h2>
+                                            <ul class="list">
+                                                <li>
+                                                    <a>
+                                                        Product
+                                                        <span>Total</span>
+                                                    </a>
+                                                </li>
+                                                
+                                         @{
+                                                 var db = new ClinicManagement.Models.ClinicManagmentSystemEntities();
+                                             var p = db.Products.ToList();
+
+
+                                             var count = 0;
+                                             foreach (var item in ViewBag.Items)
+                                             {
+
+                                                 foreach (var pro in p)
+                                                 {
+
+                                                     if (item.Id == pro.Id)
+                                                     {
+                                                         var total = item.Count * pro.Price;
+                                                         count += total;
+                                                <li>
+                                                    <a>
+                                                        @pro.SuppliedProduct.ProductName
+                                                        <span class="middle">@item.Count</span>
+                                                        <span class="last">@total</span>
+                                                    </a>
+                                                </li>
+
+                                                     }
+
+                                                 }
+                                             }
+
+                                        }
+
+                                            </ul>
+                
+
+                                            <ul class="list list_2">
+                                                <li>
+                                                    <a>
+                                                        Subtotal
+                                                        <span>@count</span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+
+                                                </li>
+                                            </ul>
+                                            <ul>
+                                                <li></li>
+                                            </ul>
+                                           
+
+                                        </div>
+
+                                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Checkout Area =================-->
+    <!--================ Subscription Area ================-->
+    
+    <!--================ End Subscription Area ================-->
+    <!--================ start footer Area  =================-->
+    <!--================ End footer Area  =================-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/stellar.js"></script>
+    <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+    <script src="vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="vendors/isotope/isotope-min.js"></script>
+    <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="js/jquery.ajaxchimp.min.js"></script>
+    <script src="js/mail-script.js"></script>
+    <script src="vendors/jquery-ui/jquery-ui.js"></script>
+    <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendors/counter-up/jquery.counterup.js"></script>
+    <script src="js/theme.js"></script>
+</body>
+</html>
+
+

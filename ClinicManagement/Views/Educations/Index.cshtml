@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ClinicManagement.Models.Education>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="panel-body">
+        <div class="alert alert-info">
+            <p style="color:black;font-size:16px;">Educations</p>
+        </div>
+    </div>
+</div>
+
+<p>
+    <a href="@Url.Action("Create","Educations")"><b class="btn btn-default">Create New</b></a>
+</p>
+<table class="table table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Topic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EducationType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Teacher)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Topic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EducationType.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Organizer.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Teacher.Name)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit","Educations",new {id=item.Id })"><i class="fa fa-edit fa-fw"></i></a> |
+            <a href="@Url.Action("Details","Educations",new {id=item.Id })"><i class="fa fa-file-text-o"></i></a> |
+            <a href="@Url.Action("Delete","Educations",new {id=item.Id })"><i class="fa fa-trash fa-fw"></i></a> |
+            <a href="@Url.Action("Images","Educations",new {id=item.Id })"><i class="fa fa-image fa-fw"></i></a> 
+        </td>
+    </tr>
+}
+
+</table>

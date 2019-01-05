@@ -1,0 +1,102 @@
+﻿@model IEnumerable<ClinicManagement.Models.SuppliedProduct>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="panel-body">
+        <div class="alert alert-info">
+            <p style="color:black;font-size:16px;">Supplied Products</p>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4"><a href="@Url.Action("Create","SuppliedProducts")"><b class="btn btn-default">Create New</b></a></div>
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        @using (Html.BeginForm("Index", "SuppliedProducts", FormMethod.Get))
+        {
+            <table>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="search" name="search" placeholder="Search..." value="" class="form-control" />
+                            
+                    </td>
+                    <td>
+                        <button type="submit" class="searchButton form-control">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </td>
+
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+<br />
+<table class="table table-hover table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AvailableQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Datetime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Supplier)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AvailableQuantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datetime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Supplier.Name)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit","SuppliedProducts",new {id=item.Id })"><i class="fa fa-edit fa-fw"></i></a> |
+            <a href="@Url.Action("Details","SuppliedProducts",new {id=item.Id })"><i class="fa fa-file-text-o"></i></a> |
+            <a href="@Url.Action("Delete","SuppliedProducts",new {id=item.Id })"><i class="fa fa-trash fa-fw"></i></a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,26 @@
+﻿@model ClinicManagement.Models.EducationType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EducationType</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <a href="@Url.Action("Edit","EducationTypes",new {id=Model.Id})"><i class="fa fa-edit" style="font-size:40px;"></i></a> |
+    <a href="@Url.Action("Index","EducationTypes")"><i class="fa fa-arrow-circle-left" style="font-size:40px;"></i></a>
+</p>
